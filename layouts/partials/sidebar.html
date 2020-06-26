@@ -8,7 +8,7 @@
             <p><em>{{ .Site.Params.AuthorBlurb }}</em></p>
         </div -->
 
-        {{ $related := .Site.RegularPages.Related . | first 10 }}
+        {{ $related := (.Site.RegularPages.Related .).Reverse | first 10 }}
         {{ with $related }}
         <h3>See Also</h3>
         <div class="pure-menu pure-menu-open">
@@ -24,7 +24,7 @@
         <div class="pure-menu pure-menu-open">
             <ul class="pure-menu-list">
                 <li class="pure-menu-item">
-                    <a href="/posts/google-page-rank/" class="pure-menu-link">Google Page Rank</a>
+                    <a href="/google-page-rank/" class="pure-menu-link">Understanding Google Page Rank</a>
                 </li>
             </ul>
         </div>
@@ -32,7 +32,7 @@
         <h3>Latest Articles</h3>
         <div class="pure-menu pure-menu-open">
             <ul class="pure-menu-list">
-                {{ range first 10 (where .Site.RegularPages "Type" "in" site.Params.mainSections) }}
+                {{ range first 100 (where .Site.RegularPages "Type" "in" site.Params.mainSections) }}
                 <li class="pure-menu-item">
                     <a href="{{ .Permalink }}" class="pure-menu-link">{{ .Title }}<br>
                         <small>{{ .Description }}</small>
