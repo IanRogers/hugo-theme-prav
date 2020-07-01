@@ -10,15 +10,19 @@
     - Last Modified: <time pubdate="{{ .Lastmod.Format "2006-01-02" }}">{{ .Lastmod.Format "Jan 2, 2006" }}</time>
     {{ end }}
     <!-- span class="author">by {{ .Site.Params.author }}</span -->
+    {{ if .Date }} - {{ i18n "readingTime" .ReadingTime }} {{ end }}
+    {{ if .Params.tags }}
+    <span style="float: right">
+    {{ range $i, $t := .Params.tags }}
+        {{ if $i }}, {{ end }}
+        <a href="{{ relLangURL ( printf "tags/%s" ( $t | urlize ) ) }}">#{{ $t }}</a>
+        {{ end }}
+    </span>
+    {{ end }}
 </div>
 {{ end }}
 <article>
     <h1><a href="{{ .Permalink }}">{{ .Title }}</a></h1>
-    <div class="tags">
-        {{ range .Params.tags }}
-        {{ $name := . }}
-        <a href="/tags/{{ $name | urlize }}" class="pure-button">{{ $name }}</a>
-        {{ end }}
-    </div>
+
     {{ replace .Content "<table>" "<table class='pure-table pure-table-striped'>" | safeHTML }}
 </article>
