@@ -25,4 +25,13 @@
     <h1><a href="{{ .Permalink }}">{{ .Title }}</a></h1>
 
     {{ replace .Content "<table>" "<table class='pure-table pure-table-striped'>" | safeHTML }}
+    <div class="date">
+        {{ with .NextInSection }}
+        <a href="{{.Permalink}}">&lt; {{ .Title }}</i> </a>
+        {{ end }}
+        &nbsp;
+        {{ with .PrevInSection }}
+        <span style="float: right"><a href="{{.Permalink}}">{{ .Title }} &gt;</a></span>
+        {{ end }}
+    </div>
 </article>
